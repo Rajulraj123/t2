@@ -128,7 +128,41 @@ You can test the API endpoints using Postman. Import the Postman collection from
 
 ## Deployment
 
-The application can be deployed to any platform that supports Next.js, such as Vercel or Netlify. Make sure to set up the environment variables in your deployment environment.
+### Vercel Deployment
+
+The application is optimized for deployment on Vercel. Follow these steps for deployment:
+
+1. **Push your code to GitHub**
+2. **Connect your repository to Vercel**
+3. **Configure Environment Variables**
+   - Add all required environment variables in Vercel's project settings
+   - Ensure `DATABASE_URL` is properly set with your PostgreSQL connection string
+   - Set `NEXT_PUBLIC_API_URL` to your deployment URL
+
+### Database Migrations
+
+**Important:** Database migrations are intentionally separated from the build process. After deploying to Vercel, you need to run migrations manually:
+
+1. **Local Development:**
+   ```bash
+   npm run migrate
+   npm run seed:branches
+   npm run seed:seating-types
+   ```
+
+2. **Production:**
+   - Use a secure environment to run migrations against your production database
+   - Never run migrations during the build process
+   - Ensure your database connection string is properly configured
+   - Run migrations before deploying new features that require schema changes
+
+### Troubleshooting
+
+If you encounter build issues:
+1. Check if all environment variables are properly set in Vercel
+2. Verify database connection string is correct
+3. Ensure all dependencies are properly installed
+4. Check build logs for specific error messages
 
 ## License
 
